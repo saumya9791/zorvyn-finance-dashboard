@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Zorvyn Finance — Premium Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body class="dark">
+
+<!-- ══════════════════════════ LANDING PAGE ══════════════════════════ -->
+<div id="landing" class="flex flex-col items-center justify-center min-h-screen relative">
+  <div class="mesh-bg"></div>
+  <div class="grid-lines"></div>
+  <div class="absolute top-1/4 left-1/6 w-48 h-48 rounded-full float-anim" style="background:radial-gradient(circle,rgba(124,58,237,0.25),transparent 70%);filter:blur(20px);"></div>
+  <div class="absolute bottom-1/3 right-1/6 w-64 h-64 rounded-full float-anim" style="background:radial-gradient(circle,rgba(99,102,241,0.2),transparent 70%);filter:blur(25px);animation-delay:-1.5s;"></div>
+  <div class="relative z-10 flex flex-col items-center text-center px-6 max-w-4xl">
+    <div class="fade-up mb-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-600 tracking-wider" style="background:rgba(129,140,248,0.1);border:1px solid rgba(129,140,248,0.25);color:#a78bfa;">
+      <span class="w-2 h-2 rounded-full bg-violet-400 inline-block" style="box-shadow:0 0 8px #a78bfa;"></span>
+      ZORVYN FINANCE PLATFORM
+    </div>
+    <h1 class="fade-up-2 text-5xl md:text-7xl font-900 leading-tight tracking-tight text-white mb-6" style="letter-spacing:-0.02em;">
+      Planning &amp; Analysis with<br/>
+      <span class="gradient-text">Microsoft-powered</span><br/>
+      Financial Dashboards
+    </h1>
+    <p class="fade-up-3 text-lg max-w-2xl leading-relaxed mb-10" style="color:rgba(203,213,225,0.8);">
+      Discover the power of insightful data at your fingertips. Access your finance analytics dashboard and explore limitless insights firsthand.
+    </p>
+    <button onclick="launchDashboard()" class="fade-up-4 glow-btn font-700 text-lg px-10 py-4 rounded-2xl flex items-center gap-3 cursor-pointer">
+      Explore Dashboard
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+  
+</div>
+
+<!-- ══════════════════════════ DASHBOARD ══════════════════════════ -->
+<div id="dashboard">
+  <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar flex flex-col" id="sidebar">
+    <div class="flex items-center gap-3 px-6 py-5 border-b" style="border-color:inherit;">
+      <div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#7c3aed,#a78bfa);">
+        <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div>
+        <div class="font-800 text-base logo-text">Zorvyn</div>
+        <div class="text-xs font-500" style="color:#7c3aed;">Finance</div>
+      </div>
+    </div>
+    <div class="px-4 pt-4 pb-2">
+      <div class="text-xs font-600 mb-2 uppercase tracking-wider" style="color:#94a3b8;">Access Level</div>
+      <select id="roleSelect" class="select-role w-full text-sm rounded-lg px-3 py-2 font-500 cursor-pointer" onchange="handleRoleChange(this.value)">
+        <option value="admin">👑 Admin (Full Access)</option>
+        <option value="viewer">👁 Viewer (Read Only)</option>
+      </select>
+    </div>
+    <nav class="flex-1 py-2 overflow-y-auto scrollbar-hide">
+      <div class="nav-item active" onclick="switchTab('overview',this)">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Overview
+      </div>
+      <div class="nav-item" onclick="switchTab('wallet',this)">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M16 12a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/><path d="M2 10h20"/></svg>
+        My Wallet
+      </div>
+      <div class="nav-item" onclick="switchTab('goals',this)">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        Savings Goals
+      </div>
+      <div class="nav-item" onclick="switchTab('history',this)">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="12 8 12 12 14 14"/><path d="M3.05 11a9 9 0 1 0 .5-3.15"/><polyline points="3 4 3 11 10 11"/></svg>
+        History
+      </div>
+    </nav>
+    <div class="px-4 py-4 border-t" style="border-color:inherit;">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-700" style="background:linear-gradient(135deg,#7c3aed,#a78bfa);color:white;">S</div>
+        <div>
+          <div class="text-sm font-600 logo-text">Saumya</div>
+          <div class="text-xs" style="color:#94a3b8;">Admin</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content page-bg" id="mainContent">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="flex items-center gap-4">
+        <button class="md:hidden p-2 rounded-lg" onclick="toggleSidebar()" style="color:#7c3aed;">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <h2 id="pageTitle" class="text-lg font-700 logo-text">Overview</h2>
+      </div>
+      <div class="flex items-center gap-3">
+        <button onclick="toggleTheme()" class="p-2 rounded-lg transition-all" style="border:1px solid rgba(129,140,248,0.2);">
+          <svg id="sunIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:#f59e0b;display:none;">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg id="moonIcon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:#a78bfa;">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <button id="addTxnBtn" onclick="openModal()" class="add-btn px-4 py-2 rounded-xl text-sm font-600 flex items-center gap-2">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <span class="hidden sm:inline">Add Transaction</span>
+        </button>
+        <button class="relative p-2 rounded-lg" style="border:1px solid rgba(129,140,248,0.2);">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:#a78bfa;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="absolute top-1 right-1 w-2 h-2 rounded-full" style="background:#ef4444;"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- OVERVIEW TAB -->
+    <div class="tab-content active p-6" id="tab-overview">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
+        <div class="kpi-card sm:col-span-2 lg:col-span-1">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-sm font-600" style="color:#94a3b8;">Total Balance</span>
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:rgba(124,58,237,0.15);">
+              <svg width="18" height="18" fill="none" stroke="#a78bfa" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+          </div>
+          <div id="kpiBalance" class="text-4xl font-800 mb-3" style="letter-spacing:-0.02em;">₹0</div>
+          <div class="flex gap-6">
+            <div>
+              <div class="text-xs font-500 mb-1" style="color:#10b981;">▲ Income</div>
+              <div id="kpiIncome" class="text-base font-700" style="color:#10b981;">₹0</div>
+            </div>
+            <div>
+              <div class="text-xs font-500 mb-1" style="color:#ef4444;">▼ Expenses</div>
+              <div id="kpiExpense" class="text-base font-700" style="color:#ef4444;">₹0</div>
+            </div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-sm font-600" style="color:#94a3b8;">Net Profit</span>
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:rgba(16,185,129,0.12);">
+              <svg width="18" height="18" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            </div>
+          </div>
+          <div id="kpiProfit" class="text-3xl font-800 mb-2" style="color:#10b981;letter-spacing:-0.02em;">₹0</div>
+          <div class="text-xs font-500" style="color:#94a3b8;">Income − Expenses</div>
+        </div>
+        <div class="kpi-card">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-sm font-600" style="color:#94a3b8;">Avg Transaction</span>
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:rgba(251,191,36,0.12);">
+              <svg width="18" height="18" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+          </div>
+          <div id="kpiAvg" class="text-3xl font-800 mb-2" style="color:#fbbf24;letter-spacing:-0.02em;">₹0</div>
+          <div class="text-xs font-500" style="color:#94a3b8;">Across all transactions</div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-5">
+        <div class="chart-card lg:col-span-2">
+          <div class="font-700 logo-text mb-1">Cash Flow Trend</div>
+          <div class="text-xs mb-4" style="color:#94a3b8;">Monthly income &amp; expenses</div>
+          <canvas id="cashFlowChart" height="120"></canvas>
+        </div>
+        <div class="chart-card">
+          <div class="font-700 logo-text mb-1">Expense Breakdown</div>
+          <div class="text-xs mb-4" style="color:#94a3b8;">By category</div>
+          <canvas id="doughnutChart" height="200"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="font-700 logo-text mb-1">Income vs Expenses</div>
+        <div class="text-xs mb-4" style="color:#94a3b8;">Monthly comparison</div>
+        <canvas id="barChart" height="100"></canvas>
+      </div>
+    </div>
+
+    <!-- MY WALLET TAB -->
+    <div class="tab-content p-6" id="tab-wallet">
+      <div class="mb-6">
+        <div class="font-800 text-xl logo-text">My Assets</div>
+        <div class="text-sm mt-1" style="color:#94a3b8;">Your financial portfolio at a glance</div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="walletGrid"></div>
+    </div>
+
+    <!-- SAVINGS GOALS TAB -->
+    <div class="tab-content p-6" id="tab-goals">
+      <div class="mb-6">
+        <div class="font-800 text-xl logo-text">Savings Goals</div>
+        <div class="text-sm mt-1" style="color:#94a3b8;">Track your financial targets</div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5" id="goalsGrid"></div>
+    </div>
+
+    <!-- HISTORY TAB -->
+    <div class="tab-content p-6" id="tab-history">
+      <div class="mb-5 flex flex-col sm:flex-row sm:items-center gap-3 justify-between">
+        <div>
+          <div class="font-800 text-xl logo-text">Transaction History</div>
+          <div class="text-sm mt-1" style="color:#94a3b8;">All your financial activity</div>
+        </div>
+        <button onclick="exportCSV()" class="export-btn">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Report
+        </button>
+      </div>
+      <div class="chart-card mb-4 p-4 flex flex-wrap gap-3 items-center">
+        <div class="flex-1 min-w-[160px]">
+          <input type="text" id="searchInput" class="search-input rounded-xl px-4 py-2.5 text-sm w-full font-500" placeholder="🔍  Search description..." oninput="applyFilters()"/>
+        </div>
+        <select id="filterType" class="filter-select rounded-xl px-3 py-2.5 text-sm font-500 cursor-pointer" onchange="applyFilters()">
+          <option value="all">💼 All Types</option>
+          <option value="income">💰 Income Only</option>
+          <option value="expense">💸 Expense Only</option>
+        </select>
+        <select id="filterCategory" class="filter-select rounded-xl px-3 py-2.5 text-sm font-500 cursor-pointer" onchange="applyFilters()">
+          <option value="all">🗂 All Categories</option>
+          <option value="salary">Salary</option>
+          <option value="freelance">Freelance</option>
+          <option value="investment">Investment</option>
+          <option value="food">Food & Dining</option>
+          <option value="housing">Housing</option>
+          <option value="bills">Bills & Utilities</option>
+          <option value="transport">Transport</option>
+          <option value="entertainment">Entertainment</option>
+          <option value="other">Other</option>
+        </select>
+        <button onclick="clearFilters()" class="text-xs font-600 px-3 py-2.5 rounded-xl transition-all" style="background:rgba(239,68,68,0.1);color:#ef4444;border:1px solid rgba(239,68,68,0.2);">✕ Clear</button>
+      </div>
+      <div class="text-xs font-500 mb-3 px-1" style="color:#94a3b8;" id="filterCount"></div>
+      <div class="chart-card overflow-hidden p-0">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="text-xs font-700 uppercase tracking-wider" style="color:#94a3b8;border-bottom:1px solid rgba(129,140,248,0.1);">
+                <th class="px-5 py-3.5 text-left">Description</th>
+                <th class="px-5 py-3.5 text-left">Category</th>
+                <th class="px-5 py-3.5 text-left">Date</th>
+                <th class="px-5 py-3.5 text-left">Type</th>
+                <th class="px-5 py-3.5 text-right">Amount</th>
+              </tr>
+            </thead>
+            <tbody id="transactionTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="zorvyn-footer">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-logo-icon">Z</div>
+            <div class="footer-brand-name">Zorvyn Finance</div>
+            <div class="footer-desc">AI-driven financial insights for modern professionals.</div>
+          </div>
+          <div>
+            <div class="footer-col-title">Solutions</div>
+            <a href="#" class="footer-link"><span style="margin-right:7px;opacity:0.5;">◈</span>Analytics</a>
+            <a href="#" class="footer-link"><span style="margin-right:7px;opacity:0.5;">◈</span>Asset Management</a>
+            <a href="#" class="footer-link"><span style="margin-right:7px;opacity:0.5;">◈</span>Role Security</a>
+          </div>
+          <div>
+            <div class="footer-col-title">Company</div>
+            <a href="#" class="footer-link"><span style="margin-right:7px;opacity:0.5;">◈</span>About Us</a>
+            <a href="#" class="footer-link">
+              <span style="margin-right:7px;opacity:0.5;">◈</span>Careers
+              <span style="margin-left:6px;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;background:rgba(16,185,129,0.15);color:#10b981;vertical-align:middle;">Hiring</span>
+            </a>
+            <a href="#" class="footer-link"><span style="margin-right:7px;opacity:0.5;">◈</span>Support</a>
+          </div>
+          <div>
+            <div class="footer-col-title">Follow Us</div>
+            <div class="footer-social-row">
+              <a href="#" class="footer-social-btn" title="LinkedIn">
+                <svg width="17" height="17" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+              <a href="#" class="footer-social-btn" title="Twitter / X">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+              <a href="#" class="footer-social-btn" title="GitHub">
+                <svg width="17" height="17" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-divider"><hr class="footer-divider-line"/></div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 Zorvyn Finance. All rights reserved.</span>
+        <span class="footer-badge">✦ Designed by Saumya </span>
+      </div>
+    </footer>
+
+  </div><!-- end #mainContent -->
+</div><!-- end #dashboard -->
+
+<!-- ADD TRANSACTION MODAL -->
+<div id="modal" class="fixed inset-0 z-50 flex items-center justify-center modal-bg" style="display:none!important;">
+  <div class="modal-box rounded-2xl p-8 w-full max-w-md mx-4 relative">
+    <button onclick="closeModal()" class="absolute top-4 right-4 p-2 rounded-lg" style="color:#94a3b8;">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="font-800 text-xl logo-text mb-1">Add Transaction</div>
+    <div class="text-sm mb-6" style="color:#94a3b8;">Record a new income or expense</div>
+    <div class="space-y-4">
+      <div>
+        <label class="text-xs font-600 uppercase tracking-wider mb-1.5 block" style="color:#94a3b8;">Description</label>
+        <input type="text" id="txnDesc" class="input-field w-full rounded-xl px-4 py-3 text-sm font-500" placeholder="e.g. Salary, Groceries..."/>
+      </div>
+      <div>
+        <label class="text-xs font-600 uppercase tracking-wider mb-1.5 block" style="color:#94a3b8;">Amount (₹)</label>
+        <input type="number" id="txnAmount" class="input-field w-full rounded-xl px-4 py-3 text-sm font-500" placeholder="0.00" min="0"/>
+      </div>
+      <div>
+        <label class="text-xs font-600 uppercase tracking-wider mb-1.5 block" style="color:#94a3b8;">Type</label>
+        <select id="txnType" class="input-field w-full rounded-xl px-4 py-3 text-sm font-500 cursor-pointer">
+          <option value="income">💰 Income</option>
+          <option value="expense">💸 Expense</option>
+        </select>
+      </div>
+      <div>
+        <label class="text-xs font-600 uppercase tracking-wider mb-1.5 block" style="color:#94a3b8;">Category</label>
+        <select id="txnCategory" class="input-field w-full rounded-xl px-4 py-3 text-sm font-500 cursor-pointer">
+          <option value="salary">💼 Salary</option>
+          <option value="freelance">🧑‍💻 Freelance</option>
+          <option value="investment">📈 Investment</option>
+          <option value="food">🍽 Food & Dining</option>
+          <option value="housing">🏠 Housing</option>
+          <option value="bills">⚡ Bills & Utilities</option>
+          <option value="transport">🚗 Transport</option>
+          <option value="entertainment">🎬 Entertainment</option>
+          <option value="other">📦 Other</option>
+        </select>
+      </div>
+      <button onclick="addTransaction()" class="add-btn w-full py-3.5 rounded-xl font-700 text-base mt-2">Add Transaction</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
