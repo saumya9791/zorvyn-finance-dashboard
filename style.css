@@ -1,7 +1,12 @@
 *, *::before, *::after { box-sizing: border-box; }
 :root {
-  --navy: #0f0f1a; --navy2: #1a1a2e; --navy3: #16213e;
-  --indigo: #312e81; --violet: #7c3aed; --accent: #818cf8; --accent2: #a78bfa;
+  --navy: #0a0a12; 
+  --navy2: #111122; 
+  --navy3: #0f172a;
+  --indigo: #1e40af; /* Darker Blue */
+  --violet: #2563eb; /* Electric Blue */
+  --accent: #60a5fa; /* Light Blue */
+  --accent2: #93c5fd;
 }
 body { font-family: 'Plus Jakarta Sans', sans-serif; margin:0; padding:0; }
 
@@ -216,4 +221,4 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; margin:0; padding:0; }
 .light .footer-copy { color:#94a3b8; }
 .footer-badge { font-size:11px; font-weight:600; padding:4px 12px; border-radius:20px; letter-spacing:0.04em; }
 .dark  .footer-badge { background:rgba(124,58,237,0.12); color:#a78bfa; border:1px solid rgba(124,58,237,0.2); }
-.light .footer-badge { background:rgba(124,58,237,0.08); color:#7c3aed; border:1px solid rgba(124,58,237,0.15); }
+.light .footer-badge { background:rgba(124,58,237,0.08); color:#2563eb; border:1px solid rgba(124,58,237,0.15); }

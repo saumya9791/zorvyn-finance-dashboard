@@ -1,7 +1,7 @@
 // ══════════════════════════════════════════════════════════════
 //  CONSTANTS & STORAGE KEY
 // ══════════════════════════════════════════════════════════════
-const STORAGE_KEY = 'zorvyn_saumyaFinanceLog';
+const STORAGE_KEY = 'nexflow_saumyaFinanceLog';
 
 // ══════════════════════════════════════════════════════════════
 //  MOCK API — simulates a fetch with async/await + Promise
@@ -333,7 +333,7 @@ function exportCSV() {
   const url  = URL.createObjectURL(blob);
   const a    = document.createElement('a');
   a.href     = url;
-  a.download = `zorvyn_report_${new Date().toISOString().split('T')[0]}.csv`;
+  a.download = `nexflow_report_${new Date().toISOString().split('T')[0]}.csv`;
   a.click();
   URL.revokeObjectURL(url);
   toast('📥 Report downloaded successfully!', '#059669');
