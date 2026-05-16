@@ -1,6 +1,6 @@
 <div align="center">
 
-# 💜 Zorvyn Finance Dashboard
+# 📈 NexFlow Finance Dashboard
 
 ### Production-Grade Financial Analytics Platform for Modern Professionals
 
@@ -10,7 +10,7 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chart.js&logoColor=white)](https://www.chartjs.org/)
 
-> A high-fidelity finance dashboard built as a Frontend Developer assignment — featuring real-time analytics, persistent transactions, and interactive data visualizations.
+> A high-fidelity finance dashboard built to showcase advanced Frontend engineering — featuring real-time analytics, persistent transactions, and interactive data visualizations.
 
 </div>
 
@@ -22,13 +22,13 @@
 ---
 
 ## 📖 About the Project
-**Zorvyn Finance Dashboard** is a comprehensive financial tracking application built to demonstrate advanced frontend engineering skills. It simulates a real-world banking environment where users can manage their income, expenses, and overall portfolio with a polished UI.
+**NexFlow Finance Dashboard** is a comprehensive financial tracking application built to demonstrate advanced frontend engineering skills. It provides a real-world banking environment where users can manage their income, expenses, and overall portfolio with a polished, professional UI.
 
 ### Key Skills Demonstrated:
-- **Responsive Layout Architecture** using modern CSS techniques.
+- **Responsive Layout Architecture** using modern CSS techniques and Flexbox/Grid.
 - **State Management** with browser-side persistence (`localStorage`).
-- **Data Visualization** using the Chart.js library.
-- **Asynchronous Patterns** to simulate API data fetching.
+- **Data Visualization** using the Chart.js library for interactive insights.
+- **Asynchronous Patterns** to simulate professional API data-fetching.
 
 ---
 
@@ -42,29 +42,29 @@
 
 ### 💳 Transaction Management
 - **Full CRUD Support:** Add and view transactions with real-time UI updates.
-- **Persistent Data:** All data is saved to `localStorage`, so your information stays even after a page refresh.
+- **Persistent Data:** All data is saved to `localStorage`, ensuring data remains after page refreshes.
 - **Advanced Filtering:** Powerful search bar and dropdown filters for categories and transaction types.
 
 ### 🎨 Design & UI
 - **Responsive Design:** Seamless experience across Mobile, Tablet, and Desktop.
 - **Modern Typography:** Uses Google Fonts (Plus Jakarta Sans) for a premium look.
-- **Zero Framework Dependency:** Built with pure Vanilla JS for maximum performance.
+- **Zero Framework Dependency:** Built with pure Vanilla JS to showcase performance and core DOM manipulation.
 
 ---
 
 ## 🛠 Tech Stack
 - **Structure:** HTML5 (Semantic)
-- **Styling:** CSS3 (Flexbox, Grid, Custom Keyframes)
+- **Styling:** CSS3 (Custom Variables, Keyframes, Flex/Grid)
 - **Logic:** Vanilla JavaScript (ES6+)
 - **Charts:** Chart.js (CDN)
 - **Storage:** Web Storage API (localStorage)
 
 ---
 
-## 🧠 Technical Decisions & Trade-offs
-- **Why Vanilla JS?** To showcase a deep understanding of DOM manipulation and browser APIs without the crutch of a framework like React.
-- **Why Chart.js?** It provides production-quality, responsive charts out of the box with better performance than heavy SVG-based libraries for this use case.
-- **Mock API Implementation:** The initial data is loaded via an `async/await` promise to mirror real-world professional data-fetching patterns.
+## 🧠 Technical Decisions
+- **Why Vanilla JS?** To demonstrate a deep understanding of core JavaScript, DOM manipulation, and browser APIs without relying on external frameworks.
+- **Why Chart.js?** It provides high-performance, responsive, and production-quality charts suitable for financial data.
+- **Mock API Implementation:** Initial data is loaded via an `async/await` pattern to mirror real-world professional data-fetching.
 
 ---
 
@@ -72,4 +72,4 @@
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/saumya9791/zorvyn-finance-dashboard.git](https://github.com/saumya9791/zorvyn-finance-dashboard.git)
+   git clone [https://github.com/saumya-singh/NexFlow-Finance-Dashboard.git](https://github.com/saumya-singh/NexFlow-Finance-Dashboard.git)
